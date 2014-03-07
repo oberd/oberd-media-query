@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Media Query Example</title>
+  <script src="../bower_components/modernizr/modernizr.js"></script>
+</head>
+<body>
+  <style>
+  .active {
+    font-weight: bold;
+    color: black;
+    font-size: 2em;
+  }
+  #log, #devices {
+    width: 50%;
+    float: left;
+  }
+  .tablet-stuff { display: none; }
+  .desktop-stuff { display: none; }
+  .wide-stuff { display: none; }
+  .hd-stuff { display: none; }
+
+  .tablet .tablet-stuff { display: block; }
+  .desktop .desktop-stuff { display: block; }
+  .wide .wide-stuff { display: block; }
+  .hd .hd-stuff { display: block; }
+  </style>
+  <div id="log"></div>
+  <div id="devices">
+    <div>Phone</div>
+    <div class="tablet-stuff">Tablet</div>
+    <div class="desktop-stuff">Desktop</div>
+    <div class="wide-stuff">Wide</div>
+    <div class="hd-stuff">Hd</div>
+  </div>
+  <script src="../bower_components/requirejs/require.js"></script>
+  <script>
+    require.config({
+      paths: {
+        'jquery': '../bower_components/jquery/dist/jquery',
+        'backbone': '../bower_components/backbone/backbone',
+        'underscore': '../bower_components/underscore/underscore',
+      }
+    });
+    require(['jquery','../media-query'], function ($, mq){
+      var prev = null;
+      mq.on('match', function (matched) {
+        if(prev){ prev.removeClass('active'); }
+        prev = $('<div class="match active">Matched ' + matched + '</div>');
+        $('#log').prepend(prev);
+      });
+      mq.on('unmatch', function (matched) {
+        if(prev){ prev.removeClass('active'); }
+        prev = $('<div class="match active">Unmatched ' + matched + '</div>');
+        $('#log').prepend(prev);
+      });
+      mq.watch();
+    });
+  </script>
+</body>
+</html>
