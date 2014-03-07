@@ -7,12 +7,12 @@ design.
 
 By default, mq ships with the following breakpoints:
 
-|| Name         | Min-Width     |
-| ------------- |:-------------:|
-| tablet        | 450px         |
-| desktop       | 769px         |
-| wide          | 1025px        |
-| hd            | 1401px        |
+Name     | Min-Width
+-------- | ---------
+tablet   | 450px
+desktop  | 769px
+wide     | 1025px
+hd       | 1401px
 
 When breakpoints are matched, the corresponding keys
 are added to the documentElement of the page. For instance
