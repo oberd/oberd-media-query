@@ -26,9 +26,21 @@ define(function (require) {
   };
 
   MediaQuery.prototype.update = function () {
-    this.prev = _.clone(this.matched || []);
+    var prev = _.clone(this.matched || []);
     this.matched = [];
     _.each(this._breakpoints, this.testBreakPoint, this);
+    _.each(prev, function (key) {
+      if (this.matched.indexOf(key) < 0) {
+        this.trigger('unmatch:' + key);
+        this.trigger('unmatch', key);
+      }
+    });
+    _.each(this.matched, function (key) {
+      if (prev.indexOf(key) < 0) {
+        this.trigger('match:' + key);
+        this.trigger('match', key);
+      }
+    });
     return this;
   };
 
@@ -36,17 +48,9 @@ define(function (require) {
     var hasMq = Modernizr.mq(mq);
     if (hasMq) {
       $(document.documentElement).addClass(key);
-      if(this.prev.indexOf(key) < 0){
-        this.trigger('match:' + key);
-        this.trigger('match', key);
-      }
       this.matched.push(key);
     } else {
       $(document.documentElement).removeClass(key);
-      if(this.prev.indexOf(key) >= 0){
-        this.trigger('unmatch:' + key);
-        this.trigger('unmatch', key);
-      }
     }
   };
 
