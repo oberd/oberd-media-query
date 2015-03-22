@@ -1,6 +1,6 @@
 {
   "name": "oberd-media-query",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Mobile first class based media query polyfill for webapps",
   "main": "media-query.js",
   "scripts": {

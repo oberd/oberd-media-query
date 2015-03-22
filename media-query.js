@@ -65,5 +65,9 @@ define(function (require) {
     return _.unique(this.matched);
   };
 
+  MediaQuery.prototype.is = function (breakpoint) {
+    return this.getMatched().indexOf(breakpoint) >= 0;
+  };
+
   return new MediaQuery();
 });
