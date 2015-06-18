@@ -8,6 +8,7 @@ define(function (require) {
 
   function MediaQuery() {
     this._breakpoints = {
+      'mobile': '(min-width: 0px)',
       'tablet': '(min-width: 450px)',
       'desktop': '(min-width: 769px)',
       'wide': '(min-width: 1025px)',
